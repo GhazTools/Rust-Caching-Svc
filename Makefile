@@ -5,20 +5,20 @@
 
 # Run the application
 run:
-    cargo run
+	cargo run
 
 # Fully build the project: clean, build, and test
 full-build:
-    cargo clean && cargo build && cargo test
+	cargo clean && cargo build && cargo test
 
 # Build the project
 build:
-    cargo build
+	cargo build
 
 # Test the project
 test:
-    cargo test
+	cargo test
 
 # Clean up the project
 clean:
-    cargo clean
+	cargo clean
