@@ -11,6 +11,13 @@ You must have rust installed
 To run your service you can do the following
 
 ```bash
+make full-build
+make run
+```
+
+or
+
+```bash
 cargo clean && cargo build && cargo run
 ```
 
