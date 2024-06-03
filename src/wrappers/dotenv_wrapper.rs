@@ -49,12 +49,18 @@ mod tests {
         let test_cases = vec![("REDIS_HOST"), ("REDIS_PORT"), ("REDIS_PASSWORD")];
 
         for environment_var_key in test_cases {
+            // Dont need this line locally
+            std::env::set_var(environment_var_key, "Some value");
+
             let result = get_env_variable(environment_var_key);
             assert!(
                 !result.is_empty(),
                 "Value for {} was empty",
                 environment_var_key
             );
+
+            // Dont need this line locally
+            std::env::remove_var(environment_var_key);
         }
     }
 
