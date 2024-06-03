@@ -1,16 +1,24 @@
+# This Makefile provides commands for building, testing, and cleaning up a Rust project.
+
+# Phony targets
 .PHONY: run full-build build test clean
 
+# Run the application
 run:
-	cargo run
+    cargo run
 
-full-build: 
-	cargo clean && cargo build && cargo test
+# Fully build the project: clean, build, and test
+full-build:
+    cargo clean && cargo build && cargo test
 
+# Build the project
 build:
-	cargo build
+    cargo build
 
+# Test the project
 test:
-	cargo test
+    cargo test
 
+# Clean up the project
 clean:
-	cargo clean
+    cargo clean

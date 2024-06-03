@@ -15,8 +15,7 @@ indent_style = "Space"
 # The newline character to use. The default is "\n".
 newline = "\n"
 
-
-# Trailing commas 
+# Trailing commas
 # trailing comma in arrays
 always_trailing_comma = false
 # trailing comma when multi-line
