@@ -16,3 +16,11 @@ repos:
       - id: fmt
       - id: clippy
       - id: cargo-check
+  - repo: local
+    hooks:
+      - id: cargo-test
+        name: cargo test
+        entry: cargo test
+        language: script
+        pass_filenames: false
+        types: [rust]
