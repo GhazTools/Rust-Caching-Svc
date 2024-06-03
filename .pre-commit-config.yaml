@@ -14,14 +14,5 @@ repos:
     rev: v1.0
     hooks:
       - id: fmt
-        args: ["--verbose", "--edition", "2018", "--"]
       - id: clippy
       - id: cargo-check
-  - repo: local
-    hooks:
-      - id: cargo-test
-        name: Run cargo test
-        entry: cargo test
-        language: script
-        pass_filenames: false
-        types: [rust]

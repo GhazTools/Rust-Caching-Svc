@@ -2,6 +2,7 @@
 use axum::response::Json;
 use r2d2_redis::redis::{Commands, RedisError};
 use serde::{Deserialize, Serialize};
+use tracing::{error, info};
 // EXTERNAL IMPORTS END HERE
 
 // LOCAL IMPORTS START HERE
@@ -25,11 +26,17 @@ pub async fn get_variable_request(request: Json<GetVariableRequest>) -> Json<Get
     let result: Result<String, RedisError> = connection.get(variable_name);
 
     match result {
-        Ok(value) => Json(GetVariableResponse {
-            variable_value: value,
-        }),
+        Ok(value) => {
+            info!("Successfully retrieved variable: {}", variable_name);
+            Json(GetVariableResponse {
+                variable_value: value,
+            })
+        }
         Err(e) => {
-            eprintln!("Failed to set variable: {}", e);
+            error!(
+                "Failed to retrieve variable: {}. Error: {}",
+                variable_name, e
+            );
             Json(GetVariableResponse {
                 variable_value: "InnvalidResponseFromRedis".to_string(),
             })
