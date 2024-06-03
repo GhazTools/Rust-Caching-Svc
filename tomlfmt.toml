@@ -1,19 +1,91 @@
+# tomlfmt.toml
+
+# The encoding of the input files. The default is "utf-8".
+encoding = "utf-8"
+
+# The maximum width of a line. The default is 80.
+width = 100
+
+# The number of spaces per indentation level. The default is 4.
+indent_size = 2
+
+# Whether or not to use spaces for indentation. The default is true.
+indent_style = "Space"
+
+# The newline character to use. The default is "\n".
+newline = "\n"
+
+
+# Trailing commas 
 # trailing comma in arrays
 always_trailing_comma = false
 # trailing comma when multi-line
 multiline_trailing_comma = true
 space_around_eq = true
+
+# spacing
 # remove all the spacing inside the array
 compact_arrays = false
 # remove all the spacing inside the object
 compact_inline_tables = false
 trailing_newline = true
+
 # is it ok to have blank lines inside of a table
 # this option needs to be true for the --grouped flag
 key_value_newlines = true
 allowed_blank_lines = 1
+
 # windows style line endings
 crlf = false
+
 # The user specified ordering of tables in a document.
 # All unspecified tables will come after these.
 table_order = []
+
+
+# Ordering
+# The order of the sections. The default is ["package", "lib", "bin", "example", "test", "bench", "dependencies", "dev-dependencies", "build-dependencies", "features", "workspace", "target", "profile", "patch", "replace", "cargo-features"].
+section_order = [
+    "package",
+    "lib",
+    "bin",
+    "example",
+    "test",
+    "bench",
+    "dependencies",
+    "dev-dependencies",
+    "build-dependencies",
+    "features",
+    "workspace",
+    "target",
+    "profile",
+    "patch",
+    "replace",
+    "cargo-features",
+]
+# The order of the keys in each section. The default is [].
+key_order = [
+    "name",
+    "version",
+    "authors",
+    "edition",
+    "description",
+    "documentation",
+    "readme",
+    "homepage",
+    "repository",
+    "license",
+    "license-file",
+    "keywords",
+    "categories",
+    "workspace",
+    "build",
+    "links",
+    "exclude",
+    "include",
+    "publish",
+    "metadata",
+]
+
+# Whether or not to sort the dependencies. The default is true.
+sort_dependencies = true
