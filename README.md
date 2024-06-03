@@ -21,4 +21,3 @@ cargo-sort takes a look at tomlfmt.toml to figure out how to sort your toml file
 cargo install cargo-sort
 cargo sort
 ```
-# Rust-Caching-Sec
