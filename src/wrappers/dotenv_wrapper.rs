@@ -34,11 +34,16 @@ mod tests {
 
     #[test]
     fn test_get_env_variable_valid() {
+        // ADD ALL VARIABLES THAT SHOULD BE IN .env FILE HERE
         let test_cases = vec![("REDIS_HOST"), ("REDIS_PORT"), ("REDIS_PASSWORD")];
 
-        for (key) in test_cases {
-            let result = get_env_variable(key);
-            assert!(!result.is_empty(), "Value for {} was empty", key);
+        for environment_var_key in test_cases {
+            let result = get_env_variable(environment_var_key);
+            assert!(
+                !result.is_empty(),
+                "Value for {} was empty",
+                environment_var_key
+            );
         }
     }
 
@@ -46,9 +51,13 @@ mod tests {
     fn get_get_env_invalid_variable() {
         let test_cases = vec![("SOME_INVALID_VARIABLE_THAT_DOESNT_EXIST")];
 
-        for (key) in test_cases {
-            let result = get_env_variable(key);
-            assert_eq!(result, "", "Value for {} was not expected", key);
+        for environment_var_key in test_cases {
+            let result = get_env_variable(environment_var_key);
+            assert_eq!(
+                result, "",
+                "Value for {} was not expected",
+                environment_var_key
+            );
         }
     }
 }
