@@ -69,6 +69,9 @@ mod tests {
         let test_cases = vec![("SOME_INVALID_VARIABLE_THAT_DOESNT_EXIST")];
 
         for environment_var_key in test_cases {
+            // Ensure variable does not exist this way
+            std::env::remove_var(environment_var_key);
+
             let result = get_env_variable(environment_var_key);
             assert_eq!(
                 result, "",
