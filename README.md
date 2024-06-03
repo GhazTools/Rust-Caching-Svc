@@ -2,6 +2,10 @@
 
 A simple rust service implementation for caching items using Redis
 
+## Before You Run
+
+You must have rust installed
+
 ## How To Run
 
 To run your service you can do the following
