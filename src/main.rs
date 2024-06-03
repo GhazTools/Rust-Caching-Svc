@@ -1,5 +1,8 @@
 // EXTERNAL IMPORTS START HERE
-use axum::{routing::post, Router};
+use axum::{
+    routing::{get, post},
+    Router,
+};
 use tower::ServiceBuilder;
 use tower_http::trace::TraceLayer;
 use tracing::Level;
@@ -10,7 +13,10 @@ use tracing_subscriber::FmtSubscriber;
 mod requests;
 mod wrappers;
 
-use requests::{get_variable::get_variable_request, set_variable::set_variable_request};
+use requests::{
+    get_variable::get_variable_request, service_status::service_status_request,
+    set_variable::set_variable_request,
+};
 // LOCAL IMPORTS END HERE
 
 #[tokio::main]
@@ -27,6 +33,7 @@ async fn main() {
         .into_inner();
 
     let app: Router = Router::new()
+        .route("/", get(service_status_request))
         .route("/get_variable", post(get_variable_request))
         .route("/set_variable", post(set_variable_request))
         .layer(middleware);
