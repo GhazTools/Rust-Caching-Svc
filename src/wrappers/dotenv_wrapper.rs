@@ -1,7 +1,18 @@
-extern crate dotenv;
-
+// EXTERNAL IMPORTS START HERE
 use dotenv::dotenv;
+use lazy_static::lazy_static;
+// EXTERNAL IMPORTS END HERE
+
+// STANDARD IMPORTS START HERE
 use std::env;
+// STANDARD IMPORTS END HERE
+
+lazy_static! {
+    static ref DOT_ENV_INITIALIZED: bool = {
+        dotenv().ok();
+        true
+    };
+}
 
 /// A function used to extract an environment variable from the .env file
 ///
@@ -17,7 +28,7 @@ use std::env;
 /// # Returns
 /// A string containing the value of the environment variable or an empty string if the variable is not found
 pub fn get_env_variable(key: &str) -> String {
-    dotenv().ok();
+    let _ = *DOT_ENV_INITIALIZED;
 
     match env::var(key) {
         Ok(val) => val,
