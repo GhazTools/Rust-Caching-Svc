@@ -22,7 +22,7 @@ use requests::{
 
 #[tokio::main]
 async fn main() {
-    let file_appender = tracing_appender::rolling::daily("./logs", "rust-cache-svc.log");
+    let file_appender = tracing_appender::rolling::daily("./logs", "rust-caching-svc.log");
     let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
 
     let subscriber = FmtSubscriber::builder()
