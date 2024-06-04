@@ -6,6 +6,7 @@ use axum::{
 use tower::ServiceBuilder;
 use tower_http::trace::TraceLayer;
 use tracing::Level;
+use tracing_subscriber::fmt::time::ChronoLocal;
 use tracing_subscriber::FmtSubscriber;
 // EXTERNAL IMPORTS END HERE
 
@@ -21,8 +22,15 @@ use requests::{
 
 #[tokio::main]
 async fn main() {
+    let file_appender = tracing_appender::rolling::daily("./logs", "rust-cache-svc.log");
+    let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
+
     let subscriber = FmtSubscriber::builder()
         .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
+        .with_writer(non_blocking)
+        .with_timer(ChronoLocal::rfc_3339())
+        .with_thread_ids(true)
+        .with_thread_names(true)
         .with_max_level(Level::TRACE)
         .finish();
 

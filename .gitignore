@@ -24,3 +24,6 @@ Cargo.lock
 
 # Python Ignores
 .python-version
+
+# Local Ignores
+/logs
