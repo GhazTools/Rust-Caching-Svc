@@ -41,10 +41,7 @@ impl TokenGranterWrapper {
         let url = format!("{}/token/validate", self.token_granter_url);
         let client = reqwest::Client::new();
 
-        let mut map = HashMap::new();
-        map.insert("username", username);
-        map.insert("token", token);
-
+        let map = HashMap::from([("username", username), ("token", token)]);
         let response_result = client.post(&url).json(&map).send().await;
 
         if let Ok(response) = response_result {
