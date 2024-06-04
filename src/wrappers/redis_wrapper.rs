@@ -18,7 +18,7 @@ pub struct RedisClient {
 
 impl RedisClient {
     // INSTANTIATION LOGIC STARTS HERE
-    pub fn new() -> Self {
+    fn new() -> Self {
         let redis_url = Self::get_connection_uri();
         let manager = RedisConnectionManager::new(redis_url).unwrap();
         let pool = Pool::builder().build(manager).unwrap();

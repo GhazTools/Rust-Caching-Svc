@@ -29,7 +29,7 @@ struct TokenGranterResponse {
 
 impl TokenGranterWrapper {
     // INSTANTIATION LOGIC STARTS HERE
-    pub fn new() -> Self {
+    fn new() -> Self {
         let token_granter_url = get_env_variable("TOKEN_GRANTER_URL");
 
         TokenGranterWrapper { token_granter_url }
