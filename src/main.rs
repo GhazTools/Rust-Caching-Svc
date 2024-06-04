@@ -18,6 +18,7 @@ use requests::{
     get_variable::get_variable_request, service_status::service_status_request,
     set_variable::set_variable_request,
 };
+use wrappers::dotenv_wrapper::get_env_variable;
 // LOCAL IMPORTS END HERE
 
 #[tokio::main]
@@ -47,10 +48,17 @@ async fn main() {
         .route("/set_variable", post(set_variable_request))
         .layer(middleware);
 
-    // run our app with hyper, listening globally on port 3000
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+    // run our app with hyper
+    let listener = tokio::net::TcpListener::bind(get_binding_uri())
         .await
         .unwrap();
 
     axum::serve(listener, app).await.unwrap();
+}
+
+fn get_binding_uri() -> String {
+    let host = get_env_variable("HOST");
+    let port = get_env_variable("PORT");
+
+    format!("{}:{}", host, port)
 }
