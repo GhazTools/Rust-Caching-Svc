@@ -22,6 +22,7 @@ use requests::{
 #[tokio::main]
 async fn main() {
     let subscriber = FmtSubscriber::builder()
+        .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
         .with_max_level(Level::TRACE)
         .finish();
 
