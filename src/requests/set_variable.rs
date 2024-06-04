@@ -7,10 +7,13 @@ use tracing::{error, info};
 
 // LOCAL IMPORTS START HERE
 use crate::wrappers::redis_wrapper::REDIS_CLIENT;
+use crate::wrappers::token_granter_wrapper::TOKEN_GRANTER_CLIENT;
 // LOCAL IMPORTS END HERE
 
 #[derive(Deserialize)]
 pub struct SetVariableRequest {
+    username: String,
+    token: String,
     variable_name: String,
     variable_value: String,
 }
@@ -21,6 +24,13 @@ pub struct SetVariableResponse {
 }
 
 pub async fn set_variable_request(request: Json<SetVariableRequest>) -> Json<SetVariableResponse> {
+    if !TOKEN_GRANTER_CLIENT
+        .validate_token(&request.username, &request.token)
+        .await
+    {
+        return Json(SetVariableResponse { successful: false });
+    }
+
     let mut connection = REDIS_CLIENT.get_connection().unwrap();
     let variable_name: &String = &request.variable_name;
     let variable_value: &String = &request.variable_value;
